@@ -1,0 +1,2 @@
+swiftmailer:
+    delivery_address: [first@host.com, second@host.com]

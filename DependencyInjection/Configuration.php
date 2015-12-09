@@ -111,7 +111,17 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->scalarNode('sender_address')->end()
-                ->scalarNode('delivery_address')->end()
+                ->variableNode('delivery_address')
+                    ->info('Forces the to: header can be a single email "example@example.com" or an array of delivery addresses')
+                    ->validate()
+                        ->ifTrue(
+                            function ($value) {
+                                return !is_array($value) && !is_string($value);
+                            }
+                        )
+                        ->thenInvalid('Delivery address must be either an array of email addresses or a singe email address.')
+                    ->end()
+                ->end()
                 ->arrayNode('antiflood')
                     ->children()
                         ->scalarNode('threshold')->defaultValue(99)->end()

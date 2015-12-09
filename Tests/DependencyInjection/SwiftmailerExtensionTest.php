@@ -254,6 +254,17 @@ class SwiftmailerExtensionTest extends TestCase
     /**
      * @dataProvider getConfigTypes
      */
+    public function testMultiRedirectionConfig($type)
+    {
+        $container = $this->loadContainerFromFile('redirect_multi', $type);
+
+        $this->assertSame(array('swiftmailer.default.plugin' => array(array())), $container->getDefinition('swiftmailer.mailer.default.plugin.redirecting')->getTags());
+        $this->assertSame(array('first@host.com', 'second@host.com'), $container->getParameter('swiftmailer.mailer.default.single_address'));
+    }
+
+    /**
+     * @dataProvider getConfigTypes
+     */
     public function testAntifloodConfig($type)
     {
         $container = $this->loadContainerFromFile('antiflood', $type);
