@@ -111,15 +111,13 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->scalarNode('sender_address')->end()
-                ->variableNode('delivery_address')
-                    ->info('Forces the to: header can be a single email "example@example.com" or an array of delivery addresses')
-                    ->validate()
-                        ->ifTrue(
-                            function ($value) {
-                                return !is_array($value) && !is_string($value);
-                            }
-                        )
-                        ->thenInvalid('Delivery address must be either an array of email addresses or a singe email address.')
+                ->scalarNode('delivery_address')->end()
+                ->arrayNode('delivery_addresses')
+                    ->beforeNormalization()
+                        ->always()
+                        ->then(function ($v) { return array_values($v); })
+                    ->end()
+                    ->prototype('scalar')
                     ->end()
                 ->end()
                 ->arrayNode('antiflood')
@@ -142,6 +140,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
             ->fixXmlConfig('delivery_whitelist_pattern', 'delivery_whitelist')
+            ->fixXmlConfig('delivery_address', 'delivery_addresses')
             ->children()
                 ->arrayNode('delivery_whitelist')
                     ->prototype('scalar')

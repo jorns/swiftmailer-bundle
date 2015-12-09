@@ -248,6 +248,7 @@ class SwiftmailerExtensionTest extends TestCase
 
         $this->assertSame(array('swiftmailer.default.plugin' => array(array())), $container->getDefinition('swiftmailer.mailer.default.plugin.redirecting')->getTags());
         $this->assertSame('single@host.com', $container->getParameter('swiftmailer.mailer.default.single_address'));
+        $this->assertSame(['single@host.com'], $container->getParameter('swiftmailer.mailer.default.delivery_addresses'));
         $this->assertEquals(array('/foo@.*/'), $container->getParameter('swiftmailer.mailer.default.delivery_whitelist'));
     }
 
@@ -259,7 +260,7 @@ class SwiftmailerExtensionTest extends TestCase
         $container = $this->loadContainerFromFile('redirect_multi', $type);
 
         $this->assertSame(array('swiftmailer.default.plugin' => array(array())), $container->getDefinition('swiftmailer.mailer.default.plugin.redirecting')->getTags());
-        $this->assertSame(array('first@host.com', 'second@host.com'), $container->getParameter('swiftmailer.mailer.default.single_address'));
+        $this->assertSame(array('first@host.com', 'second@host.com'), $container->getParameter('swiftmailer.mailer.default.delivery_addresses'));
     }
 
     /**

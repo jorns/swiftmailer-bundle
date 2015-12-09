@@ -5,8 +5,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd
                         http://symfony.com/schema/dic/swiftmailer http://symfony.com/schema/dic/swiftmailer/swiftmailer-1.0.xsd">
 
-    <swiftmailer:config>
-        <swiftmailer:delivery-address>first@host.com</swiftmailer:delivery-address>
-        <swiftmailer:delivery-address>second@host.com</swiftmailer:delivery-address>
-    </swiftmailer:config>
+    <swiftmailer:config delivery-address="first@host.com"></swiftmailer:config>
+    <swiftmailer:config delivery-address="second@host.com"></swiftmailer:config>
 </container>

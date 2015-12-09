@@ -1,2 +1,2 @@
 swiftmailer:
-    delivery_address: [first@host.com, second@host.com]
+    delivery_addresses: { a: first@host.com, b: second@host.com}

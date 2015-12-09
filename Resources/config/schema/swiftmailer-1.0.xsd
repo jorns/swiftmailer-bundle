@@ -66,10 +66,6 @@
     </xsd:restriction>
   </xsd:simpleType>
 
-  <xsd:simpleType name="delivery-address">
-      <xsd:restriction base="xsd:string"></xsd:restriction>
-  </xsd:simpleType>
-
   <xsd:simpleType name="auth_mode">
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="plain" />
